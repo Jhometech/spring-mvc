@@ -3,6 +3,12 @@
 <body>
 <jsp:include page="../index.jsp"/>
 	<h2>Register Student</h2>
+	<%
+		String msg = (String)request.getAttribute("message");
+	    if(msg != null){
+	    	out.print(msg);
+	    }
+	%>
 	<html:form action="studentRegister.htm" method="post" modelAttribute="register"> 
 			Full Name : <html:input path="name"/>
 			Email : <html:input path="mail"/>

@@ -1,8 +1,23 @@
 package in.javahome.springmvc.model;
 
-public class Register {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Table(name="STUDENT_REGISTRATION")
+@Entity
+public class Register implements Serializable{
+	@Id@GeneratedValue
+	@Column(name="STD_ID")
+	private Integer stdId;
+	@Column(name="NAME")
 	private String name;
+	@Column(name="MAIL")
 	private String mail;
+	@Column(name="PASSWORD")
 	private String password;
 	public String getName() {
 		return name;
