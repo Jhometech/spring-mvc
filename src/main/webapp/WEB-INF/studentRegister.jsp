@@ -10,10 +10,11 @@
 	    }
 	%>
 	<html:form action="studentRegister.htm" method="post" modelAttribute="register"> 
-			Full Name : <html:input path="name"/>
-			Email : <html:input path="mail"/>
-			Password : <html:input path="password"/>
-			<input type="submit" value="Register">
+		
+			Full Name : <html:input path="name"/> <html:errors path="name"/><br>
+			Email : <html:input path="mail"/><html:errors path="mail"/><br>
+			Password : <html:input path="password"/><html:errors path="password"/><br>
+			<input type="submit" value="Register"><br>
 	</html:form>
 </body>
 </html>

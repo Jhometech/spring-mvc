@@ -1,8 +1,13 @@
 package in.javahome.springmvc.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,16 +27,19 @@ public class StudentRegistrationController {
 	}
 
 	@RequestMapping(value = "/studentRegister", method = RequestMethod.POST)
-	public String register(Register r, ModelMap map) {
-		map.addAttribute("register", r);
-		try {
-			service.register(r);
-			map.addAttribute("message", "Succussfully Register");
-		} catch (Exception e) {
-			map.addAttribute("message", "Existing User");
-			e.printStackTrace();
-		}
-		System.out.println(r);
+	public String register(@Valid @ModelAttribute("register") Register r, BindingResult result, ModelMap map) {
+		  if(result.hasErrors()){
+			  // redisplay form with error messages
+			  return "studentRegister";
+		  }
+//		  IF form data is valid go and register the student
+		  try {
+				service.register(r);
+				map.addAttribute("message", "Succussfully Register");
+			} catch (Exception e) {
+				map.addAttribute("message", "Existing User");
+				e.printStackTrace();
+			}
 		return "studentRegister";
 	}
 }
