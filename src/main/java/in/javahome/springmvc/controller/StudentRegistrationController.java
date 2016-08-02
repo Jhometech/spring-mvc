@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import in.javahome.springmvc.dao.StudentDAO;
 import in.javahome.springmvc.model.Register;
@@ -21,9 +22,11 @@ public class StudentRegistrationController {
 	private RegisterService service;
 
 	@RequestMapping(value = "/studentRegister", method = RequestMethod.GET)
-	public String getRegister(ModelMap map) {
-		map.addAttribute("register", new Register());
-		return "studentRegister";
+	public ModelAndView getRegister(ModelMap map) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("register", new Register());
+		mv.setViewName("studentRegister");
+		return mv;
 	}
 
 	@RequestMapping(value = "/studentRegister", method = RequestMethod.POST)
